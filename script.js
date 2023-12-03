@@ -28,6 +28,17 @@ snake[3] = {
 };
 
 let direction = "right"; // initial direction of the snake
+window.addEventListener("keydown", (e) => {
+  if (e.key == "ArrowRight" && direction != "left") {
+    direction = "right";
+  } else if (e.key == "ArrowLeft" && direction != "right") {
+    direction = "left";
+  } else if (e.key == "ArrowUp" && direction != "down") {
+    direction = "up";
+  } else if (e.key == "ArrowDown" && direction != "up") {
+    direction = "down";
+  }
+});
 
 let playGame = setInterval(() => {
   // Clear the canvas before drawing each frame
@@ -67,15 +78,9 @@ let playGame = setInterval(() => {
     y: snakeY,
   };
 
+  // check if the snake has eaten the food
   snake.pop();
   snake.unshift(newSnakeHead);
-
-  // check if the snake has eaten the food
-
-  //   if (snake[0].x == 340) {
-  //     alert("Game Over");
-  //     exit;
-  //   }
 }, 150);
 
-setTimeout(() => clearInterval(playGame), 1500);
+setTimeout(() => clearInterval(playGame), 3500);
