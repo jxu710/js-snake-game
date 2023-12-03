@@ -27,6 +27,21 @@ snake[3] = {
   y: 0,
 };
 
+// the food object will store the x and y coordinates of the food, randomly generated
+class Food {
+  constructor() {
+    this.x = Math.floor(Math.random() * columns) * unit;
+    this.y = Math.floor(Math.random() * rows) * unit;
+  }
+
+  drawFood() {
+    ctx.fillStyle = "beige";
+    ctx.fillRect(this.x, this.y, unit, unit);
+  }
+}
+
+let food = new Food();
+
 let direction = "right"; // initial direction of the snake
 window.addEventListener("keydown", (e) => {
   if (e.key == "ArrowRight" && direction != "left") {
@@ -40,12 +55,16 @@ window.addEventListener("keydown", (e) => {
   }
 });
 
+// draw the snake
 let playGame = setInterval(() => {
   // Clear the canvas before drawing each frame
-
   ctx.clearRect(0, 0, c.width, c.height);
   console.log(JSON.stringify(snake));
 
+  //   draw the food
+  food.drawFood();
+
+  // draw the snake
   for (item of snake) {
     if (snake.indexOf(item) == 0) {
       ctx.fillStyle = "green";
@@ -72,7 +91,18 @@ let playGame = setInterval(() => {
   } else if (direction == "down") {
     snakeY += unit;
   }
+  //   if the snake has hit the wall, then reset the snake position
+  if (snakeX >= c.width) {
+    snakeX = 0;
+  } else if (snakeX < 0) {
+    snakeX = c.width - unit;
+  } else if (snakeY >= c.height) {
+    snakeY = 0;
+  } else if (snakeY < 0) {
+    snakeY = c.height - unit;
+  }
 
+  //   set the new snake head
   let newSnakeHead = {
     x: snakeX,
     y: snakeY,
