@@ -27,15 +27,55 @@ snake[3] = {
   y: 0,
 };
 
-for (item of snake) {
-  if (snake.indexOf(item) == 0) {
-    ctx.fillStyle = "green";
-  } else {
-    ctx.fillStyle = "lightgreen";
+let direction = "right"; // initial direction of the snake
+
+let playGame = setInterval(() => {
+  // Clear the canvas before drawing each frame
+
+  ctx.clearRect(0, 0, c.width, c.height);
+  console.log(JSON.stringify(snake));
+
+  for (item of snake) {
+    if (snake.indexOf(item) == 0) {
+      ctx.fillStyle = "green";
+    } else {
+      ctx.fillStyle = "lightgreen";
+    }
+
+    //   draw a rectangle of 20px width and height at (x,y) coordinate, with a black border
+    ctx.strokeStyle = "black";
+    ctx.strokeRect(item.x, item.y, unit, unit);
+    ctx.fillRect(item.x, item.y, unit, unit);
   }
 
-  //   draw a rectangle of 20px width and height at (x,y) coordinate, with a black border
-  ctx.strokeStyle = "black";
-  ctx.strokeRect(item.x, item.y, unit, unit);
-  ctx.fillRect(item.x, item.y, unit, unit);
-}
+  //  move the snake, based on the direction of the snake
+  let snakeX = snake[0].x;
+  let snakeY = snake[0].y;
+
+  if (direction == "right") {
+    snakeX += unit;
+  } else if (direction == "left") {
+    snakeX -= unit;
+  } else if (direction == "up") {
+    snakeY -= unit;
+  } else if (direction == "down") {
+    snakeY += unit;
+  }
+
+  let newSnakeHead = {
+    x: snakeX,
+    y: snakeY,
+  };
+
+  snake.pop();
+  snake.unshift(newSnakeHead);
+
+  // check if the snake has eaten the food
+
+  //   if (snake[0].x == 340) {
+  //     alert("Game Over");
+  //     exit;
+  //   }
+}, 150);
+
+setTimeout(() => clearInterval(playGame), 1500);
