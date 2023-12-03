@@ -38,6 +38,28 @@ class Food {
     ctx.fillStyle = "beige";
     ctx.fillRect(this.x, this.y, unit, unit);
   }
+
+  generateNewFood() {
+    let overlap = false;
+    let newX, newY;
+
+    do {
+      newX = Math.floor(Math.random() * columns) * unit;
+      newY = Math.floor(Math.random() * rows) * unit;
+
+      inner: for (let i = 0; i < snake.length; i++) {
+        if (newX == snake[i].x && newY == snake[i].y) {
+          overlap = true;
+          break inner;
+        } else {
+          overlap = false;
+        }
+      }
+    } while (overlap);
+
+    this.x = newX;
+    this.y = newY;
+  }
 }
 
 let food = new Food();
@@ -109,8 +131,15 @@ let playGame = setInterval(() => {
   };
 
   // check if the snake has eaten the food
-  snake.pop();
-  snake.unshift(newSnakeHead);
+  if (snakeX == food.x && snakeY == food.y) {
+    //  generate a new food
+    food.generateNewFood();
+
+    snake.unshift(newSnakeHead);
+  } else {
+    snake.pop();
+    snake.unshift(newSnakeHead);
+  }
 }, 150);
 
 setTimeout(() => clearInterval(playGame), 3500);
