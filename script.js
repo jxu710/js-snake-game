@@ -139,7 +139,13 @@ let playGame = setInterval(() => {
   } else {
     snake.pop();
     snake.unshift(newSnakeHead);
+
+    // make sure that the snake does not overlap/eat itself
+    for (let i = 1; i < snake.length; i++) {
+      if (snake[0].x == snake[i].x && snake[0].y == snake[i].y) {
+        clearInterval(playGame);
+        alert("Game Over");
+      }
+    }
   }
 }, 150);
-
-setTimeout(() => clearInterval(playGame), 3500);
