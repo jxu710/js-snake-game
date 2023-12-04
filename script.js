@@ -77,6 +77,17 @@ window.addEventListener("keydown", (e) => {
   }
 });
 
+// calculate score
+
+let score = 0;
+let scoreOnPage = document.querySelector("#myScore");
+scoreOnPage.textContent = `Score:${score}`;
+
+let highestScore;
+getHighestScore();
+
+let highestScoreOnPage = document.querySelector("#highestScore");
+highestScoreOnPage.textContent = `Highest Score:${highestScore}`;
 // draw the snake
 let playGame = setInterval(() => {
   // make sure that the snake does not overlap/eat itself
@@ -143,8 +154,29 @@ let playGame = setInterval(() => {
     food.generateNewFood();
 
     snake.unshift(newSnakeHead);
+    score++;
+    scoreOnPage.textContent = `Score:${score}`;
+
+    // if current score is greater than the highest score, then update the highest score
+    if (score > highestScore) {
+      highestScore = score;
+      highestScoreOnPage.textContent = `Highest Score:${highestScore}`;
+      localStorage.setItem("highestScore", highestScore);
+    } else {
+      highestScoreOnPage.textContent = `Highest Score:${highestScore}`;
+    }
   } else {
     snake.pop();
     snake.unshift(newSnakeHead);
   }
 }, 150);
+
+// calculate highest score
+
+function getHighestScore() {
+  if (localStorage.getItem("highestScore") == null) {
+    highestScore = 0;
+  } else {
+    highestScore = Number(localStorage.getItem("highestScore"));
+  }
+}

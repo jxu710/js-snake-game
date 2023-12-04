@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Snake Game</title>
     <link rel="stylesheet" href="style.css" />
+    <link rel="shortcut icon" href="./assets/favicon.ico" type="image/x-icon" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css"
+    />
   </head>
   <body>
     <canvas
@@ -15,10 +20,17 @@
     >
     </canvas>
     <p id="myScore"></p>
-    <p id="myScore2"></p>
-    <button type="button" id="start" onclick="location.reload()">
+    <p id="highestScore"></p>
+    <button type="button" id="start" onclick="window.location.reload()">
       Start New Game
     </button>
+
+    <footer>
+      Created by
+      <a href="https://github.com/jxu710" target="_blank"
+        >Jingru<i class="devicon-github-original"></i>
+      </a>
+    </footer>
     <script src="./script.js"></script>
   </body>
 </html>
