@@ -79,9 +79,16 @@ window.addEventListener("keydown", (e) => {
 
 // draw the snake
 let playGame = setInterval(() => {
+  // make sure that the snake does not overlap/eat itself
+  for (let i = 1; i < snake.length; i++) {
+    if (snake[0].x == snake[i].x && snake[0].y == snake[i].y) {
+      clearInterval(playGame);
+      alert("Game Over");
+    }
+  }
   // Clear the canvas before drawing each frame
   ctx.clearRect(0, 0, c.width, c.height);
-  console.log(JSON.stringify(snake));
+  // console.log(JSON.stringify(snake));
 
   //   draw the food
   food.drawFood();
@@ -89,7 +96,7 @@ let playGame = setInterval(() => {
   // draw the snake
   for (item of snake) {
     if (snake.indexOf(item) == 0) {
-      ctx.fillStyle = "green";
+      ctx.fillStyle = "salmon";
     } else {
       ctx.fillStyle = "lightgreen";
     }
@@ -139,13 +146,5 @@ let playGame = setInterval(() => {
   } else {
     snake.pop();
     snake.unshift(newSnakeHead);
-
-    // make sure that the snake does not overlap/eat itself
-    for (let i = 1; i < snake.length; i++) {
-      if (snake[0].x == snake[i].x && snake[0].y == snake[i].y) {
-        clearInterval(playGame);
-        alert("Game Over");
-      }
-    }
   }
 }, 150);
