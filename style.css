@@ -50,9 +50,21 @@ footer{
     border-radius: 5rem;
     z-index: 1;
     cursor: pointer;
+    position: absolute;
     
 }
 
 #start:hover ,#resetButton:hover{
     background-color: lemonchiffon
+}
+
+#start{
+
+    left: 5%;
+    top: 45%;
+}
+#resetButton{
+    margin-top: 10px;
+    left: 5%;
+    top: 50%;
 }
