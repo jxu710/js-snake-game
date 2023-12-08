@@ -180,3 +180,11 @@ function getHighestScore() {
     highestScore = Number(localStorage.getItem("highestScore"));
   }
 }
+
+// reset the highest score
+let deleteButton = document.querySelector("#resetButton");
+deleteButton.addEventListener("click", () => {
+  localStorage.removeItem("highestScore");
+  highestScore = 0;
+  highestScoreOnPage.textContent = `Highest Score:${highestScore}`;
+});

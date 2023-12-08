@@ -43,15 +43,16 @@ footer{
     padding: 10px;
 }
 
-#start{
+#start ,#resetButton{
     padding: 0.5rem 1rem;
     background-color: beige;
     font-size: 1.2rem;
     border-radius: 5rem;
-    margin-top: 5px;
+    z-index: 1;
     cursor: pointer;
+    
 }
 
-#start:hover{
+#start:hover ,#resetButton:hover{
     background-color: lemonchiffon
 }
